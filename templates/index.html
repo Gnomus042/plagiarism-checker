@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plagiarism detector</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='master.css') }}">
+</head>
+<body>
+<div class="vertical-center-wrapper">
+    <div id="content">
+        <h1>Plagiarism detector</h1>
+        <form>
+            <label for="dataset-selector">Dataset</label>
+            <select class="form-control" id="dataset-selector">
+                {% for key in datasets %}
+                    <option value="{{ key }}">{{ datasets[key] }}</option>
+                {% endfor %}
+            </select>
+            <label for="method-selector">Method</label>
+            <select id="method-selector" class="form-control">
+                {% for method in methods %}
+                    <option value="{{ method }}">{{ method }}</option>
+                {% endfor %}
+            </select>
+            <label for="threshold-input">Plagiarism</label>
+            <input id="threshold-input" type="number" value="70" min="0" max="100">
+        </form>
+        <div class="d-flex">
+            <div class="input-panel panel">
+                <form>
+                    <div class="icon-wrapper" id="randomize-example"><img class="icon" src="{{ url_for('static', filename='icons/random.svg') }}" alt=""></div>
+                    <label for="examples-select">Example:</label>
+                    <select id="examples-select" class="form-control"></select>
+                    <div class="btn btn-info" id="check-btn">Check</div>
+                </form>
+                <textarea class="form-control" id="input-text" cols="60" rows="15"></textarea>
+            </div>
+            <div class="output-panel panel">
+                <div class="d-flex">
+                    <div id="score-output"></div>
+                    <div id="score-label"></div>
+                </div>
+                <div class="similar-texts"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+</html>
